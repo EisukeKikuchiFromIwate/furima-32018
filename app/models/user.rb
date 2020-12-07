@@ -23,9 +23,9 @@ class User < ApplicationRecord
     # 名前
     validates :first_name, format: { with: FROMAT_ZENKAKU, message: '全角文字を使用してください' }
     # 苗字_カナ
-    validates :last_name_kana, presence: true, format: { with: FROMAT_ZENKAKU, message: '全角カタカナを使用してください' }
+    validates :last_name_kana, presence: true, format: { with: FORMAT_KANA, message: '全角カタカナを使用してください' }
     # 名前_カナ
-    validates :first_name_kana, presence: true, format: { with: FROMAT_ZENKAKU, message: '全角カタカナを使用してください' }
+    validates :first_name_kana, presence: true, format: { with: FORMAT_KANA, message: '全角カタカナを使用してください' }
     # 生年月日
     validates :birth_day
   end
