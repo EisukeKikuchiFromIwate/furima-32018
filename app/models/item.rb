@@ -18,8 +18,8 @@ class Item < ApplicationRecord
     validates :prefecture_id
     # 発送までの日数
     validates :scheduled_delivery_id
-    # 販売価格
-    validates :price
+    # 販売価格 価格範囲の設定
+    validates :price, inclusion: {in: 300..9999999}
   end
 
   #ジャンルの選択が「--」の時は保存できないようにする
@@ -29,7 +29,7 @@ class Item < ApplicationRecord
             :prefecture_id,
             :scheduled_delivery_id,
             numericality: { other_than: 1 }
-
+  
   # アソシエーション
   belongs_to :user
   has_one_attached :image
