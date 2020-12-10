@@ -95,12 +95,12 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include('Price は半角数字を使用してください')
     end
     it '価格が299以下の場合は登録できない' do
-      @item.price = '200'
+      @item.price = 200
       @item.valid?
       expect(@item.errors.full_messages).to include('Price is not included in the list')
     end
     it '価格が10_000_000以上の場合は登録できない' do
-      @item.price = '10000000'
+      @item.price = 10000000
       @item.valid?
       expect(@item.errors.full_messages).to include('Price is not included in the list')
     end
