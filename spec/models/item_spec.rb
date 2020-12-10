@@ -35,7 +35,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include('Category is not a number')
     end
     it 'カテゴリーが「--」の時は保存できない' do
-      @item.category_id = '1'
+      @item.category_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include('Category must be other than 1')
     end
@@ -46,7 +46,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include('Status is not a number')
     end
     it '商品の状態が「--」の時は保存できない' do
-      @item.status_id = '1'
+      @item.status_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include('Status must be other than 1')
     end
@@ -57,7 +57,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include('Shipping fee status is not a number')
     end
     it '配送料の負担が「--」の時は保存できない' do
-      @item.shipping_fee_status_id = '1'
+      @item.shipping_fee_status_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include('Shipping fee status must be other than 1')
     end
@@ -68,7 +68,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include('Prefecture is not a number')
     end
     it '発送元の地域が「--」の時は保存できない' do
-      @item.prefecture_id = '1'
+      @item.prefecture_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include('Prefecture must be other than 1')
     end
@@ -79,7 +79,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include('Scheduled delivery is not a number')
     end
     it '発送までの日数が「--」の時は保存できない' do
-      @item.scheduled_delivery_id = '1'
+      @item.scheduled_delivery_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include('Scheduled delivery must be other than 1')
     end
@@ -94,8 +94,13 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include('Price は半角数字を使用してください')
     end
-    it '価格の範囲が、¥300~¥9,999,999の間であること' do
+    it '価格が299以下の場合は登録できない' do
       @item.price = '200'
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price is not included in the list')
+    end
+    it '価格が10_000_000以上の場合は登録できない' do
+      @item.price = '10000000'
       @item.valid?
       expect(@item.errors.full_messages).to include('Price is not included in the list')
     end
