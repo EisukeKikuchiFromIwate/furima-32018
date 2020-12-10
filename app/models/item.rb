@@ -1,13 +1,20 @@
 class Item < ApplicationRecord
-
-# 必須項目の設定
+  # 必須項目の設定
   with_options presence: true do
     # 商品画像
     validates :image, unless: :was_attached?
     # 商品名
-    validates :name
+    validates :name, length: { maximum: 40 }
     # 商品の説明
-    validates :info
+    validates :info, length: { maximum: 1000 }
+    # 販売価格 価格範囲の設定
+    validates :price, inclusion: { in: 300..9_999_999 }
+  end
+  # 半角数字のみ
+  validates :price, numericality: { with: /\A[0-9０-９]+\z/, message: 'は半角数字を使用してください' }
+
+  # ジャンルの選択が「--」の時は保存できないようにする
+  with_options numericality: { other_than: 1 } do
     # カテゴリー
     validates :category_id
     # 商品の状態
@@ -18,24 +25,14 @@ class Item < ApplicationRecord
     validates :prefecture_id
     # 発送までの日数
     validates :scheduled_delivery_id
-    # 販売価格 価格範囲の設定
-    validates :price, inclusion: {in: 300..9999999}
   end
 
-  #ジャンルの選択が「--」の時は保存できないようにする
-  validates :category_id,
-            :status_id,
-            :shipping_fee_status_id,
-            :prefecture_id,
-            :scheduled_delivery_id,
-            numericality: { other_than: 1 }
-  
   # アソシエーション
   belongs_to :user
   has_one_attached :image
 
   def was_attached?
-    self.image.attached?
+    image.attached?
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -44,6 +41,4 @@ class Item < ApplicationRecord
   belongs_to :shipping_fee_status
   belongs_to :prefecture
   belongs_to :scheduled_delivery
-
-  
 end

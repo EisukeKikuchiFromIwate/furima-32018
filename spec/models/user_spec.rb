@@ -29,7 +29,7 @@ RSpec.describe User, type: :model do
     it 'emailは@を含むこと' do
       @user.email = 'email.gmail.com'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Email is invalid")
+      expect(@user.errors.full_messages).to include('Email is invalid')
     end
     it '重複したemailが存在する場合登録できないこと' do
       @user.save
@@ -58,7 +58,7 @@ RSpec.describe User, type: :model do
       @user.password = '１２３４５６'
       @user.password_confirmation = '１２３４５６'
       @user.valid?
-    
+
       expect(@user.errors.full_messages).to include('Password には半角英字と半角数字の両方を含めて設定してください')
     end
     it 'password_confirmationとpasswordが不一致では登録できない' do
