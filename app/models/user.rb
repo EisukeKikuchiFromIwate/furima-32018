@@ -29,4 +29,7 @@ class User < ApplicationRecord
     # 生年月日
     validates :birth_day
   end
+
+  # アソシエーション
+  has_many :items
 end
