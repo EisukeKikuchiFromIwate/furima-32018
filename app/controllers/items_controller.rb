@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
   def index
     @items = Item.includes(:user).order('created_at DESC')
-    
   end
 
   def new
@@ -23,22 +22,18 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    if !user_signed_in?
-      return redirect_to user_session_path
-    end
-    unless @item.user_id == current_user.id
-      redirect_to action: :index
-    end
-    
+    return redirect_to user_session_path unless user_signed_in?
+
+    redirect_to action: :index unless @item.user_id == current_user.id
   end
 
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to item_path(@item)
-    else 
+    else
       render :edit
-    end  
+    end
   end
 
   private
