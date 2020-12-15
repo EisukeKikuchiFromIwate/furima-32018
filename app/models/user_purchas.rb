@@ -1,4 +1,4 @@
-class UserPurchases
+class UserPurchas
   include ActiveModel::Model
   attr_accessor :token, :postal_code, :prefecture, :city, :addresses, :building, :phone_number
   #必須のバリデーション
@@ -10,7 +10,7 @@ class UserPurchases
     # 「住所」の郵便番号に関するバリデーション
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     # 「住所」の都道府県に関するバリデーション
-    validates :prefecture, numericality: { other_than: 0, message: "can't be blank" }
+    validates :prefecture, numericality: { other_than: 1, message: "can't be blank" }
     # 「住所」の市区町村に関するバリデーション
     validates :city, { with: /\A[ぁ-んァ-ン一-龥]/, message: "全角文字を使用してください"}
     # 「住所」の番地に関するバリデーション

@@ -1,9 +1,9 @@
 class OrdersController < ApplicationController
-def index
-  
-end
+  def index
+    @user_purchas = UserPurchas.new
+  end
 
-def create
-  
-end
+  def create
+    
+  end
 end
