@@ -1,3 +1,3 @@
 class ShippingAddress < ApplicationRecord
-  has_one :user_purchas
+  has_one :user_order
 end

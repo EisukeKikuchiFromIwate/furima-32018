@@ -51,7 +51,7 @@
 ### Association
 - belongs_to :purchase
 
-## purchases テーブル
+## order テーブル
 | Column              | type       | options                        |
 | ------------------- | ---------- | ------------------------------ |
 | user                | references | null: false, foreign_key: true |
