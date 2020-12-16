@@ -5,7 +5,7 @@ class UserOrder
   with_options presence: true do
     #　価格のバリデーション
     # validates :price
-    #　トークンのバリデーション 
+    # #　トークンのバリデーション 
     validates :token
     # 「住所」の郵便番号に関するバリデーション
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
@@ -15,9 +15,10 @@ class UserOrder
     validates :city, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "全角文字を使用してください"}
     # 「住所」の番地に関するバリデーション
     validates :addresses
-  end
     # 電話番号に関するバリデーション
-    validates :phone_number, numericality: { less_than_or_equal_to: 11, message: "is out of setting range"}
+    validates :phone_number, format: { with: /\A[0-9]{,11}\z/, message: "11桁以内の半角数字を使用してください"}
+  end
+    
   
 
   def save
