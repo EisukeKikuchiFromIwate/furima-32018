@@ -6,14 +6,13 @@ class OrdersController < ApplicationController
   end
 
   def create
-    
     @user_order = UserOrder.new(order_params)
     if  @user_order.valid?
       pay_item
       @user_order.save
       redirect_to root_path
     else
-      render action: :index
+      redirect_to item_orders_path
     end
   end
 
