@@ -6,11 +6,8 @@ class OrdersController < ApplicationController
   def index
     if @item.order.present? || current_user.id == @item.user_id
       redirect_to root_path
-    elsif
-      @user_order = UserOrder.new
-    else
-      redirect_to user_session_path
     end
+    @user_order = UserOrder.new
   end
 
   def create
