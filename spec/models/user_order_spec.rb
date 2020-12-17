@@ -6,7 +6,7 @@ RSpec.describe UserOrder, type: :model do
   end
   describe '商品購入' do
     # 出品できる
-    it "shipping_addressがあれば保存できること" do
+    it "shipping_addressとtokenがあれば保存できること" do
       expect(@user_order).to be_valid
     end
     # 出品できない
@@ -26,7 +26,7 @@ RSpec.describe UserOrder, type: :model do
       expect(@user_order.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
     end
     it 'prefectureを選択していないと保存できないこと' do
-      @user_order.prefecture = 1
+      @user_order.prefecture_id = 1
       @user_order.valid?
       expect(@user_order.errors.full_messages).to include("Prefecture can't be blank")
     end
