@@ -1,3 +1,3 @@
 class ShippingAddress < ApplicationRecord
-  has_one :user_order
+  belongs_to :user_order
 end
