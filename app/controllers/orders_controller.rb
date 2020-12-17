@@ -4,9 +4,7 @@ class OrdersController < ApplicationController
   # before_action :move_root_path, only: :index
 
   def index
-    if @item.order.present?
-      redirect_to root_path
-    elsif current_user.id == @item.user_id
+    if @item.order.present? || current_user.id == @item.user_id
       redirect_to root_path
     elsif
       @user_order = UserOrder.new
