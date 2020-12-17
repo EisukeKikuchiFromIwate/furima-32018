@@ -9,13 +9,14 @@ class UserOrder
                 :phone_number, 
                 :user_id, 
                 :item_id, 
-                :price, 
                 :order_id
   #必須のバリデーション
   with_options presence: true do
-    #　価格のバリデーション
-    # validates :price
-    # #　トークンのバリデーション 
+    # user_idのバリデーション
+    validates :user_id
+    # item_idのバリデーション
+    validates :item_id
+    # トークンのバリデーション 
     validates :token
     # 「住所」の郵便番号に関するバリデーション
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
