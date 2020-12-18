@@ -26,9 +26,7 @@ class ItemsController < ApplicationController
     return redirect_to user_session_path unless user_signed_in?
 
     redirect_to action: :index unless @item.user_id == current_user.id
-    unless @item.order.blank?
-      redirect_to root_path
-    end
+    redirect_to root_path unless @item.order.blank?
   end
 
   def update
