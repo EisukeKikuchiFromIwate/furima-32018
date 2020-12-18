@@ -5,12 +5,16 @@ RSpec.describe UserOrder, type: :model do
     @user_order = FactoryBot.build(:user_order)
   end
   describe '商品購入' do
-    context '出品できる' do
+    context '購入ができる' do
       it "shipping_addressとtokenがあれば保存できること" do
         expect(@user_order).to be_valid
       end
+      it 'buildingが空の場合でも購入ができる' do
+        @user_order.building = nil
+        expect(@user_order).to be_valid
+      end
     end
-    context '出品できない' do
+    context '購入ができない' do
       it 'tokenが空だと保存できないこと' do
         @user_order.token = nil
         @user_order.valid?
